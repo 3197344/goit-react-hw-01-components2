@@ -16,20 +16,8 @@ state = {
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
   ],
   filter: '',
-  name: '',
-  number: ''
 }
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
-  
-  handleSubmit = (e) => {
-  e.preventDefault();
-  this.addNewContact();
-    this.deleteContact();
-  }
 delContact = contactId => {
     const state = this.state;
     const visibleContacts = state.contacts.filter(
@@ -39,24 +27,8 @@ delContact = contactId => {
     return visibleContacts;
   };
 
-  deleteContact = () => {
-    this.setState(() => ({
-      filter: '',
-      name: '',
-      number: '',
-    }
-    ))
-  }
-  filterContacts() {
-    if (this.state.filter === '') {
-      return this.state.contacts;
-    }
-    const filteredArray = this.state.contacts.filter((item) => item.name.toLowerCase().includes(this.state.filter.toLowerCase()))
-    return filteredArray;
-  }
-
-  addNewContact = () => {
-    const { contacts, name, number } = this.state;
+  addNewContact = ({ id, name, number }) => {
+    const { contacts} = this.state;
     
     const contact = {
       id: nanoid(),
@@ -69,29 +41,41 @@ delContact = contactId => {
       return;
     }
 
-    this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+  this.setState(prevState => {
+      return { contacts: [...prevState.contacts, { id, name, number }] };
+    });
+  };
+  
+
+onFilter = filter => {
+    console.log('filter', filter);
+    this.setState({ filter });
   };
 
   render() {
-    
+    const { contacts, filter } = this.state;
+    const visibleContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase()),
+    );
     return (
       <div >
         <Section title="Phonebook">
           <ContactForm
             options={this.state}
             onChangeInput={this.handleChange}
-            onSubmitForm={this.handleSubmit} />
+            handleSubmit={this.addNewContact} />
         </Section>
 
         <Section title="Contacts">
           <Filter
             options={this.state}
-            onChangeInput={this.handleChange} />
+            filter={filter} onFilter={this.onFilter}
+            onChangeInput={this.handleChange}
+          />
 
           <ContactList
-          contacts={this.filterContacts()}
+          
+            contacts={visibleContacts}
           delContact={this.delContact}/>
         </Section>
       </div>

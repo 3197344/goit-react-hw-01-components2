@@ -61,9 +61,7 @@ onFilter = filter => {
       <div >
         <Section title="Phonebook">
           <ContactForm
-            options={this.state}
-            onChangeInput={this.handleChange}
-            handleSubmit={this.addNewContact} />
+            onSubmit={this.addNewContact} />
         </Section>
 
         <Section title="Contacts">

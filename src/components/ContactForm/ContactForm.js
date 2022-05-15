@@ -5,21 +5,16 @@ import s from './ContactForm.module.css';
 
 
 export class ContactForm extends Component {
-    // inputNameId = nanoid();
-    // inputPhoneId = nanoid();
+
         state = {
             name: '',
             id: nanoid(),
         number: '',
         };
 
-    // static propTypes = {
-    // handleSubmit: PropTypes.func.isRequired,
-    // };
     
     handleChangeName = e => {
-    // const { name, value } = e.target;
-    // this.setState({ [name]: value });
+
         this.setState({ name: e.currentTarget.value });
     };
     handleChangeNumber = e => {
@@ -33,10 +28,6 @@ export class ContactForm extends Component {
         e.preventDefault();
         console.log(!this.state.name, !this.state.number);
 
-        // this.setState({
-        // name: '',
-        // number: '',
-        // });
     this.props.onSubmit(this.state);
     this.reset();
     };

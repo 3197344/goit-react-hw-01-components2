@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 import Section from './Section/Section';
 import ContactForm from './ContactForm/ContactForm';
@@ -27,25 +27,35 @@ delContact = contactId => {
     return visibleContacts;
   };
 
-  addNewContact = ({ id, name, number }) => {
-    const { contacts} = this.state;
+  // addNewContact = ({ id, name, number }) => {
+  //   const { contacts} = this.state;
     
-    const contact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+  //   const contact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
 
-    if (contacts.some(({ name }) => name === contact.name)) {
-      alert(`Sorry, ${name} already exists`);
-      return;
-    }
+  //   if (contacts.some(({ name }) => name === contact.name)) {
+  //     alert(`Sorry, ${name} already exists`);
+  //     return;
+  //   }
 
-  this.setState(prevState => {
-      return { contacts: [...prevState.contacts, { id, name, number }] };
-    });
-  };
+  // this.setState(prevState => {
+  //     return { contacts: [...prevState.contacts, { id, name, number }] };
+  //   });
+  // };
   
+submitHandler = obj => {
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, obj],
+    }));
+  };
+
+handleChange = event => {
+const { name, value } = event.target;
+this.setState({ [name]: value });
+};
 
 onFilter = filter => {
     console.log('filter', filter);
@@ -61,7 +71,7 @@ onFilter = filter => {
       <div >
         <Section title="Phonebook">
           <ContactForm
-            onSubmit={this.addNewContact} />
+            onSubmit={this.submitHandler} array={contacts}/>
         </Section>
 
         <Section title="Contacts">
@@ -72,8 +82,7 @@ onFilter = filter => {
           />
 
           <ContactList
-          
-            contacts={visibleContacts}
+          contacts={visibleContacts}
           delContact={this.delContact}/>
         </Section>
       </div>

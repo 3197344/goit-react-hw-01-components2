@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
 
-function Contacts  (props) {
-    const { contacts, delContact } = props;
-    
+function Contacts  ({ contacts, delContact }) {
     return (
         <ul className={s.section}>
             {contacts.map(({ name, number, id }) => (

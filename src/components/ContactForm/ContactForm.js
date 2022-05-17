@@ -6,30 +6,42 @@ import s from './ContactForm.module.css';
 
 export class ContactForm extends Component {
 
-        state = {
-            name: '',
-            id: nanoid(),
+    state = {
+        name: '',
+        // id: nanoid(),
         number: '',
-        };
+    };
+    static propTypes = {
+        onSubmitForm: PropTypes.func.isRequired,
+        array: PropTypes.arrayOf(PropTypes.object).isRequired
+    };
 
-    
     handleChangeName = e => {
-
         this.setState({ name: e.currentTarget.value });
     };
+
     handleChangeNumber = e => {
         this.setState({ number: e.currentTarget.value });
     };
     reset = () => {
-    this.setState({ name: '', number: '' });
+        this.setState({ name: '', number: '' });
     };
 
     handleSubmit = e => {
         e.preventDefault();
+        const { name, number } = this.state;
         console.log(!this.state.name, !this.state.number);
-
-    this.props.onSubmit(this.state);
-    this.reset();
+const sameName = this.props.array.find(arr => arr.name === name);
+    if (sameName) {
+        return alert(`${name} is already in contacts`);
+        }
+        const nameObj = {
+        id: nanoid(),
+        name: name,
+        number: number,
+        };
+        this.props.onSubmit(nameObj);
+        this.reset();
     };
 
 
@@ -37,7 +49,8 @@ export class ContactForm extends Component {
         return (
             <>
                 <form className={s.section}
-                    onSubmit={this.handleSubmit}>
+                    // onSubmit={this.handleSubmit}
+                >
                     <label className={s.section_label}>Name</label>
                     <input
                         className={s.section_input}
@@ -62,15 +75,12 @@ export class ContactForm extends Component {
                     />
                     <button
                         className={s.section_btn}
-                        type="submit">Add contact</button>
+                        type="submit" onClick={this.handleSubmit}>Add contact</button>
                 </form></>
         );
     }
 };
 
-ContactForm.propTypes = {
-    onSubmit: PropTypes.func,
-};
 
 
 export default ContactForm;

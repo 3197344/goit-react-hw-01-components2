@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { nanoid } from 'nanoid';
 
 import Section from './Section/Section';
 import ContactForm from './ContactForm/ContactForm';
@@ -27,25 +26,7 @@ delContact = contactId => {
     return visibleContacts;
   };
 
-  // addNewContact = ({ id, name, number }) => {
-  //   const { contacts} = this.state;
-    
-  //   const contact = {
-  //     id: nanoid(),
-  //     name,
-  //     number,
-  //   };
 
-  //   if (contacts.some(({ name }) => name === contact.name)) {
-  //     alert(`Sorry, ${name} already exists`);
-  //     return;
-  //   }
-
-  // this.setState(prevState => {
-  //     return { contacts: [...prevState.contacts, { id, name, number }] };
-  //   });
-  // };
-  
 submitHandler = obj => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, obj],
@@ -71,13 +52,13 @@ onFilter = filter => {
       <div >
         <Section title="Phonebook">
           <ContactForm
-            onSubmit={this.submitHandler} array={contacts}/>
+            onSubmit={this.submitHandler} contacts={contacts}/>
         </Section>
 
         <Section title="Contacts">
           <Filter
             options={this.state}
-            filter={filter} onFilter={this.onFilter}
+            filter={filter} onChange={this.onFilter}
             onChangeInput={this.handleChange}
           />
 

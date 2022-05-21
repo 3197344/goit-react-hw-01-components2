@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import s from './ContactForm.module.css';
+import s from '../ContactForm/ContactForm.module.css';
 
 
 export class ContactForm extends Component {
 
     state = {
         name: '',
-        // id: nanoid(),
         number: '',
     };
     static propTypes = {
@@ -49,7 +48,6 @@ const sameName = this.props.array.find(arr => arr.name === name);
         return (
             <>
                 <form className={s.section}
-                    // onSubmit={this.handleSubmit}
                 >
                     <label className={s.section_label}>Name</label>
                     <input

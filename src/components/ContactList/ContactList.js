@@ -1,22 +1,19 @@
 import PropTypes from 'prop-types';
-import s from './ContactList.module.css';
+import ContactsElementList from '../ContactsElementList/ContactsElementList';
+import s from '../ContactList/ContactList.module.css';
 
 
 function Contacts  ({ contacts, delContact }) {
     return (
         <ul className={s.section}>
-            {contacts.map(({ name, number, id }) => (
-                <li key={id}
-                    className={s.section_item}>
-                    {name}: {number}
-                    <button
-                        className={s.section_btn}
-                        type="button"
-                        onClick={() => delContact(id)}>
-                        Delete
-                    </button>
-                </li>
-            ))}
+            {contacts.map(({ name, number, id }) => 
+
+                <ContactsElementList
+                    key={id}
+                    name={name}
+                    number={number}
+                    delContact={() => delContact(id)} />
+            )}
         </ul>
     )
 };

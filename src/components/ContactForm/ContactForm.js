@@ -30,7 +30,13 @@ export class ContactForm extends Component {
         e.preventDefault();
         const { name, number } = this.state;
         console.log(!this.state.name, !this.state.number);
-const sameName = this.props.contacts.find(arr => arr.name === name);
+
+    if (!this.state.name || !this.state.number) {
+    alert('You have not entered all contact details');
+    return;
+    }
+
+    const sameName = this.props.contacts.find(arr => arr.name === name);
     if (sameName) {
         return alert(`${name} is already in contacts`);
         }

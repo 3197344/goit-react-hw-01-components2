@@ -4,12 +4,12 @@ import s from "../ContactsElementList/ContactsElementList.module.css"
 
 function ContactsElementList( {name, number, delContact} ) {
     return (        
-        <li>
+        <li className={s.section_item }>
             <span className={s.name}>{name}:</span>
             {number}
             <button
                 onClick={delContact}
-                className={s.button}>Delete</button>
+                className={s.section_btn}>Delete</button>
         </li>
             )
     

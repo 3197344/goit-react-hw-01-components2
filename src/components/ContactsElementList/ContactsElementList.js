@@ -15,9 +15,9 @@ function ContactsElementList( {name, number, delContact} ) {
     
 };
 ContactsElementList.propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-    delContact: PropTypes.func.isRequired
+    name: PropTypes.string,
+    number: PropTypes.string,
+    delContact: PropTypes.func
 };
 
 export default ContactsElementList;

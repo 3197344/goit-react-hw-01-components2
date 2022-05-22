@@ -20,12 +20,12 @@ function Contacts  ({ contacts, delContact }) {
 Contacts.propTypes = {
     contacts: PropTypes.arrayOf
         (PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            number: PropTypes.string.isRequired,
+            id: PropTypes.string,
+            name: PropTypes.string,
+            number: PropTypes.string,
         })
         ),
-    delContact: PropTypes.func.isRequired,
+    delContact: PropTypes.func,
 };
 
 export default Contacts;

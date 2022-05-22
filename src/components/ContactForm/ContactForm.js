@@ -11,8 +11,8 @@ export class ContactForm extends Component {
         number: '',
     };
     static propTypes = {
-        onSubmitForm: PropTypes.func.isRequired,
-        array: PropTypes.arrayOf(PropTypes.object).isRequired
+        onSubmitForm: PropTypes.func,
+        contacts: PropTypes.arrayOf(PropTypes.object)
     };
 
     handleChangeName = e => {
@@ -30,7 +30,7 @@ export class ContactForm extends Component {
         e.preventDefault();
         const { name, number } = this.state;
         console.log(!this.state.name, !this.state.number);
-const sameName = this.props.array.find(arr => arr.name === name);
+const sameName = this.props.contacts.find(arr => arr.name === name);
     if (sameName) {
         return alert(`${name} is already in contacts`);
         }
